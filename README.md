@@ -1,6 +1,6 @@
 <h1>ExpNo 2 : Implement Depth First Search Traversal of a Graph</h1> 
-<h3>Name: </h3>
-<h3>Register Number:     </h3>
+<h3>Name: Lokeshwaran S</h3>
+<h3>Register Number: 212224240080</h3>
 <H3>Aim:</H3>
 <p> To Implement Depth First Search Traversal of a Graph using Python 3.</p>
 <h3>Theory:</h3>
@@ -89,6 +89,61 @@ F H <BR>
 ['0', '1', '2', '3', '4']
 
 <hr>
+
+<h3>Program:</h3>
+
+```
+from collections import defaultdict
+
+def dfs(graph, start, visited, path):
+    path.append(start)
+    visited[start] = True
+
+    for neighbour in graph[start]:
+        if not visited[neighbour]:
+            dfs(graph, neighbour, visited, path)
+
+    return path
+
+graph = defaultdict(list)
+
+n, e = map(int, input().split())
+
+edges_read_count = 0
+while edges_read_count < e:
+    try:
+        line_data = input().split()
+        if not line_data: 
+            break 
+    except EOFError:
+        break 
+
+    for j in range(0, len(line_data), 2):
+        if j + 1 < len(line_data): 
+            u = line_data[j]
+            v = line_data[j+1]
+            graph[u].append(v)
+            graph[v].append(u)
+            edges_read_count += 1
+            if edges_read_count == e:
+                break 
+        else:
+            print(f"Warning: Skipping malformed edge token '{line_data[j]}' on a line.")
+
+    if edges_read_count == e: 
+        break
+
+start = 'A'
+visited = defaultdict(bool)
+path = []
+
+traversedpath = dfs(graph, start, visited, path)
+print(traversedpath)
+```
+
+<h3>Output:</h3>
+<img width="919" height="434" alt="image" src="https://github.com/user-attachments/assets/62ebfd76-abfe-4386-a9c4-297f080c1b68" />
+
 <h3>Result:</h3>
 <hr>
 <p>Thus,a Graph was constructed and implementation of Depth First Search for the same graph was done successfully.</p>
